@@ -1,6 +1,7 @@
 library(ggplot2)
 library(shiny)
 library(shinydashboard)
+library(DT)
 data <- read.csv("C:/Users/mirta/Downloads/Nappe/dataViz/Video_Games_Sales_as_at_22_Dec_2016.csv")
 
 ui <- dashboardPage(skin = "purple",
@@ -58,16 +59,18 @@ ui <- dashboardPage(skin = "purple",
   ),
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Overview", tabName = "overview", icon = icon("dashboard")),
+      menuItem("Overview", tabName = "overview", icon = icon("dashboard"),
+               menuSubItem("Distribution", tabName = "distribution"),
+               menuSubItem("Evolution", tabName = "evolution")),
       menuItem("Statistics", tabName = "statistics", icon = icon("th")),
       menuItem("DataTable", tabName = "dataTable", icon = icon("th")),
       menuItem("Upload", tabName = "upload", icon = icon("th")),
-      menuItem("Source code", icon = icon("file-code-o"), href = "https://github.com/rstudio/shinydashboard/")
+      menuItem("Source code", icon = icon("file-code-o"), href = "https://github.com/martinloevborg/Data-Visualization-project")
     )
   ),
   dashboardBody(
     tabItems(
-      tabItem(tabName = "overview",
+      tabItem(tabName = "distribution",
         fluidRow(height = 200,
           box(title = "Controls",
             selectInput(inputId = "y", 
@@ -92,6 +95,9 @@ ui <- dashboardPage(skin = "purple",
           )
         )
       ),
+      tabItem(tabName = "evolution",
+        h2("Pie chart, Line and Barplot")
+      ),
       tabItem(tabName = "statistics",
         fluidRow(
           infoBox("Mean", 10 * 2, icon = icon("credit-card")),
@@ -115,10 +121,15 @@ ui <- dashboardPage(skin = "purple",
         )
       ),
       tabItem(tabName = "dataTable",
-        h2("Showcase of data set")
+        h2("Showcase of data set"),
+        checkboxGroupInput("show_vars", "Parameters",
+                           names(data), selected = names(data), inline = TRUE),
+        DT::dataTableOutput("mytable")
       ),
       tabItem(tabName = "upload",
-        h2("Option to upload data")
+        h2("Option to upload data"),
+        fileInput("fileId", h3("File input"), accept = ".csv"),
+        tableOutput("contents")
       )
     )
   )
@@ -142,6 +153,14 @@ server <- function(input, output){
   
   output$scatterplot <- renderPlot({
     ggplot(data = data, aes_string(x = input$x, y = input$y)) + geom_point()
+  })
+  output$mytable = DT::renderDataTable({
+    DT::datatable(data[, input$show_vars, drop = FALSE])
+  })
+  output$contents <- renderTable({
+    fileVar <- input$fileId
+    req(fileVar)
+    read.csv(fileVar$datapath)
   })
 }
 
