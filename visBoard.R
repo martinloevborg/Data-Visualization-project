@@ -2,7 +2,7 @@ library(ggplot2)
 library(shiny)
 library(shinydashboard)
 library(DT)
-data <- read.csv("C:/Users/mirta/Downloads/Nappe/dataViz/Video_Games_Sales_as_at_22_Dec_2016.csv")
+data <- read.csv("./Video_Games_Sales_as_at_22_Dec_2016.csv")
 
 ui <- dashboardPage(skin = "purple",
   dashboardHeader(title = "Games Sales",
