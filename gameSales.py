@@ -152,6 +152,11 @@ app.layout = html.Div([
                 'width': '100%',  # Adjust as needed
                 'textAlign': 'center'
             }),
+        html.A(
+        html.Button('Open Project Report', style={'backgroundColor': '#007BFF', 'color': 'white'}),
+        href='https://github.com/martinloevborg/Data-Visualization-project/blob/main/Data_Visualization_2023_Group_5.pdf',
+        target='_blank'
+        ),
     ], style={'position': 'fixed', 'top': 0, 'left': 0, 'bottom': 0, 'width': '20%', 'padding': '20px'}),
     
     html.Div([
