@@ -11,7 +11,7 @@ py gameSales.py
 
 go to http://127.0.0.1:8050/ in browser
 
-# With virtual environment:
+# With virtual environment (recommended):
 
 open folder in cmd
 
