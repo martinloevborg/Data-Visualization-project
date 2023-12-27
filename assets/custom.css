@@ -1,0 +1,39 @@
+.Select--multi .Select-control {
+    background-color: #333; /* Dark background for the dropdown container */
+    color: white; /* Light color for the text */
+}
+
+.Select--multi .Select-value {
+    background-color: #007BFF; /* Background color of the selected item */
+    color: white; /* Text color of the selected item */
+    border-radius: 2px; /* Optional: Rounds the corners */
+    margin: 2px; /* Optional: Adds space around each item */
+    padding: 2px 8px; /* Padding inside each selected item */
+}
+
+.Select--multi .Select-value-icon {
+    color: white; /* Color of the remove icon (x) */
+    cursor: pointer; /* Changes cursor to pointer when hovering over the icon */
+}
+
+.Select--multi .Select-value-label {
+    color: white; /* Text color of the label */
+}
+
+.Select-menu-outer {
+    background-color: #333; /* Dark background for the dropdown menu */
+    color: white; /* Light color for the text */
+}
+
+.VirtualizedSelectOption {
+    background-color: #333; /* Dark background for each option */
+    color: white; /* Light color for the text */
+}
+
+@media (max-width: 768px) {
+    .Select--multi .Select-control,
+    .Select-menu-outer,
+    .VirtualizedSelectOption {
+        width: 100%; /* Ensures dropdowns fit within the container on smaller screens */
+    }
+}
