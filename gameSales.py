@@ -33,7 +33,7 @@ def animated_graph():
         color='Region',
         animation_frame='Year_of_Release',
         range_y=[0, melted_data['Sales'].max() + 10],
-        title="Yearly Sales Distribution by Region",
+        title="Yearly Sales(M) Distribution by Region",
     )
 
     fig.update_layout(
@@ -155,7 +155,7 @@ app.layout = html.Div([
     ], style={'position': 'fixed', 'top': 0, 'left': 0, 'bottom': 0, 'width': '20%', 'padding': '20px'}),
     
     html.Div([
-        html.H3("Sales distribution by region", style={'textAlign': 'center', 'margin-top': '20px'}),
+        html.H3("Sales(M) distribution by region", style={'textAlign': 'center', 'margin-top': '20px'}),
         html.Div(id='total-sales-boxes', className="total-sales-container", style={'text-align': 'center'}),
         html.Div([
             dcc.Graph(id='sales-by-region-line', style={'display': 'inline-block', 'width': '50%'}),
@@ -163,7 +163,7 @@ app.layout = html.Div([
         ], style={'display': 'flex', 'flex-direction': 'row'}),
         dcc.Graph(figure=animated_graph()),        
 
-        html.H3("Sales distribution by genre", style={'textAlign': 'center', 'margin-top': '20px'}),
+        html.H3("Sales(M) distribution by genre", style={'textAlign': 'center', 'margin-top': '20px'}),
         html.Div([
             dcc.Graph(id='sales-by-genre-pie', style={'display': 'inline-block', 'width': '50%'}),
             dcc.Graph(id='sales-by-genre-bar', style={'display': 'inline-block', 'width': '50%'})
@@ -179,10 +179,10 @@ app.layout = html.Div([
             dcc.Graph(id='critic-vs-user-score-comparison', style={'display': 'inline-block', 'width': '50%'})
         ], style={'display': 'flex', 'flex-direction': 'row'}),
 
-        html.H3("Sales distribution by platform", style={'textAlign': 'center', 'margin-top': '20px'}),
+        html.H3("Sales(M) distribution by platform", style={'textAlign': 'center', 'margin-top': '20px'}),
         dcc.Graph(id='sales-by-platform-bar'),
 
-        html.H3("Sales distribution by publisher", style={'textAlign': 'center', 'margin-top': '20px'}),
+        html.H3("Sales(M) distribution by publisher", style={'textAlign': 'center', 'margin-top': '20px'}),
         dcc.Graph(id='top-publisher-by-sales')
     ], style={'marginLeft': '22%', 'marginTop': '20px', 'padding': '20px'}),
 ])
@@ -355,7 +355,7 @@ def sales_by_genre(selectedYears, selectedRegions, selectedPlatforms, selectedPu
         )
     ])
     fig.update_layout(
-        xaxis_title="Total Sales",
+        xaxis_title="Total Sales(M)",
         yaxis_title="Genres",
         yaxis=dict(autorange="reversed")
     )
@@ -486,11 +486,11 @@ def bar_chart_platform_sales(selectedYears, selectedRegions, selectedPublishers,
 
     fig = px.bar(platform_sales, x='Platform', y='Total_Sales',
                       text='Platform',
-                     title='Platform Sales')
+                     title='Platform Sales(M)')
 
     fig.update_layout(
         xaxis_title='Platform',
-        yaxis_title='Total Sales',
+        yaxis_title='Total Sales(M)',
         xaxis={'categoryorder':'total descending'},
         yaxis=dict(type='log')
     )
@@ -523,9 +523,9 @@ def top_games_by_publisher(selectedYears, selectedPlatforms, selectedRegions, se
     )])
 
     fig.update_layout(
-        title='Top 10 Publishers by Sales',
+        title='Top 10 Publishers by Sales(M)',
         xaxis_title='Publisher',
-        yaxis_title='Total Sales',
+        yaxis_title='Total Sales(M)',
         xaxis={'categoryorder':'total descending'}
     )
 
